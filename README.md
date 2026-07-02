@@ -12,6 +12,7 @@ Sistema desarrollado en Python para simular la administración de procesos dentr
 - SQL
 - Docker
 - Node.js
+- Django
 
 ## Funcionalidades
 
