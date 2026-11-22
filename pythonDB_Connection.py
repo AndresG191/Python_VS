@@ -85,7 +85,7 @@ def ver_historial_auditoria():
     finally:
         conn.close()
 
-def recursos_H(nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono):
+def recursos_H(numero_nomina, nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono):
     """"Agregar nuevo registro a la tabla de Recursos Humanos."""
 
     if len(curp) !=18:
@@ -97,14 +97,14 @@ def recursos_H(nombre, apaterno, amaterno, curp, puesto, departamento, estatus, 
 
     try:
         cursor = conn.cursor()
-        query = """INSERT INTO recursos_humanos (nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
-                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+        query = """INSERT INTO recursos_humanos (numero_nomina, nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
          
-        valores = (nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
+        valores = (numero_nomina, nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
 
         cursor.execute(query, valores)
         conn.commit()
-        print(f"Empleado registrado exitosamente: {nombre} {apaterno} {amaterno}")
+        print(f"Empleado registrado exitosamente: {nombre} {apaterno} {amaterno} | Nómina: {numero_nomina}")
     except Error as e:
         print("Ocurrio un error al registrar el empleado: {e}")
     finally:
@@ -146,6 +146,7 @@ if __name__ == "__main__":
         elif opcion == "2":
             ver_historial_auditoria()
         elif opcion == "3":
+            numero_nomina = input("Número de nómina: ")
             nombre = input("Nombre: ")
             apaterno = input("Apellido Paterno: ")
             amaterno = input("Apellido Materno: ")
@@ -154,7 +155,7 @@ if __name__ == "__main__":
             departamento = input("Departamento: ")
             estatus = input("Estatus: ")
             telefono = input("Teléfono: ")
-            recursos_H(nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
+            recursos_H(numero_nomina, nombre, apaterno, amaterno, curp, puesto, departamento, estatus, telefono)
         elif opcion == "4":
             mostrar_empleados()
         elif opcion == "5":
